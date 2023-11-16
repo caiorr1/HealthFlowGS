@@ -40,10 +40,11 @@ const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
           Escanear QR Code
         </ButtonLink>
       </ButtonContainer>
-      <button onClick={onNext} disabled={!scanComplete}>
+      <button onClick={() => onNext()} disabled={!scanComplete}>
         Próximo
       </button>
     </Container>
   );
 };
 
+export default InsuranceQRCode;
