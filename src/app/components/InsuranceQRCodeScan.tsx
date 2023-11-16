@@ -1,6 +1,7 @@
 // components/InsuranceQRCodeScan.tsx
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import ButtonLink from './ButtonLink';
 
 interface InsuranceQRCodeScanProps {
   onScanComplete: () => void;
@@ -58,7 +59,7 @@ const InsuranceQRCodeScan: React.FC<InsuranceQRCodeScanProps> = ({ onScanComplet
           <UserInfo>CPF: 123.456.789-00</UserInfo>
           <UserInfo>Convênio: Plano de Saúde XYZ</UserInfo>
           <UserInfo>Número da Carteirinha: 987654321</UserInfo>
-          <button onClick={onScanComplete}>Próximo</button>
+          <ButtonLink customStyle='custom' onClick={onScanComplete}>Próximo</ButtonLink>
         </UserInfoContainer>
       )}
     </Container>

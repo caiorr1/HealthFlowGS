@@ -1,18 +1,28 @@
 'use client'
 import React from 'react';
+import styled from 'styled-components';
 import SymptomSelection from '../app/components/SymptomSelection';
+
+const HomeContainer = styled.div`
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+`;
+
+const HomeTitle = styled.h1`
+  color: #3498db;  
+`;
 
 const Home: React.FC = () => {
   const handleNext = () => {
-    // Implemente a lógica para avançar para a próxima etapa
     console.log('Próxima etapa');
   };
 
   return (
-    <div>
-      <h1>Bem-vindo ao Sistema de Fichas Médicas</h1>
+    <HomeContainer>
+      <HomeTitle>Bem-vindo ao Sistema de Fichas Médicas</HomeTitle>
       <SymptomSelection onNext={handleNext} />
-    </div>
+    </HomeContainer>
   );
 };
 

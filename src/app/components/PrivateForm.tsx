@@ -9,7 +9,8 @@ const PrivateForm: React.FC<PrivateFormProps> = ({ onNext }) => {
   const [formData, setFormData] = useState({
     name: '',
     cpf: '',
-    // Adicione mais campos conforme necessário
+    telefone: '',
+    rg: '',
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,21 +19,33 @@ const PrivateForm: React.FC<PrivateFormProps> = ({ onNext }) => {
   };
 
   const handleSubmit = () => {
-    // Lógica para processar os dados particulares, se necessário
-    onNext(); // Avança para a próxima etapa
+    onNext();
   };
 
   return (
     <div>
       <h2>Preencha os dados particulares:</h2>
-      <label>Nome:</label>
-      <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
 
-      <label>CPF:</label>
-      <input type="text" name="cpf" value={formData.cpf} onChange={handleInputChange} />
+      <label>
+        Nome:
+        <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
+      </label>
 
-      {/* Adicione mais campos conforme necessário */}
-      
+      <label>
+        CPF:
+        <input type="text" name="cpf" value={formData.cpf} onChange={handleInputChange} />
+      </label>
+
+      <label>
+        Telefone:
+        <input type="text" name="telefone" value={formData.telefone} onChange={handleInputChange} />
+      </label>
+
+      <label>
+        RG:
+        <input type="text" name="rg" value={formData.rg} onChange={handleInputChange} />
+      </label>
+
       <button onClick={handleSubmit}>Enviar</button>
     </div>
   );

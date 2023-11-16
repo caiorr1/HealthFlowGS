@@ -1,12 +1,10 @@
 'use client'
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ButtonLink from '../components/ButtonLink';
-import { useRouter } from 'next/router';
 
-interface PageProps {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+interface InsuranceQRCodeProps {
+  onNext: () => void;
 }
 
 const Container = styled.div`
@@ -20,32 +18,22 @@ const ButtonContainer = styled.div`
   gap: 10px;
 `;
 
-const InsuranceQRCode: React.FC<PageProps> = ({ params, searchParams }) => {
-  const [scanComplete, setScanComplete] = useState(false);
-  const router = useRouter();
+const HomeTitle = styled.h1`
+  color: #3498db;
+  font-family: 'Poppins', sans-serif;
+  padding: 20px;
+`;
 
-  const handleQRScan = () => {
-    // Lógica de escaneamento do QR Code (simulada por um atraso)
-    // Substitua isso pela lógica real de escaneamento
-    setTimeout(() => {
-      setScanComplete(true);
-    }, 2000);
-  };
+const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
 
+  
   return (
     <Container>
-      <h2>Escolha uma opção:</h2>
+      <HomeTitle>Escolha uma opção:</HomeTitle>
       <ButtonContainer>
-        <ButtonLink href="/sheet">
-          Digitar Dados
-        </ButtonLink>
-        <ButtonLink href='/scanner'>
-          Escanear QR Code
-        </ButtonLink>
+        <ButtonLink href="/sheet">Digitar Dados</ButtonLink>
+        <ButtonLink href="/scanner">Escanear QR Code</ButtonLink>
       </ButtonContainer>
-      <button onClick={() => router.push('/next-page')} disabled={!scanComplete}>
-        Próximo
-      </button>
     </Container>
   );
 };

@@ -21,6 +21,7 @@ const SymptomButton = styled.button<SymptomButtonProps>`
   font-size: 18px;
   padding: 12px;
   margin: 8px;
+  width: 200px; // Defina o valor desejado para a largura dos botões
   background-color: ${(props) => (props.isSelected ? '#3498db' : '#fff')};
   color: ${(props) => (props.isSelected ? '#fff' : '#000')};
   border: 2px solid #3498db;
