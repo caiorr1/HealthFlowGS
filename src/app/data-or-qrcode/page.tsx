@@ -47,4 +47,3 @@ const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
   );
 };
 
-export default InsuranceQRCode;
