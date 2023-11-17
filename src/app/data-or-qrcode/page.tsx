@@ -28,13 +28,13 @@ const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
 
   
   return (
-    <Container>
-      <HomeTitle>Escolha uma opção:</HomeTitle>
-      <ButtonContainer>
-        <ButtonLink href="/sheet">Digitar Dados</ButtonLink>
-        <ButtonLink href="/scanner">Escanear QR Code</ButtonLink>
-      </ButtonContainer>
-    </Container>
+      <Container>
+        <HomeTitle>Escolha uma opção:</HomeTitle>
+        <ButtonContainer>
+          <ButtonLink href="/sheet">Digitar Dados</ButtonLink>
+          <ButtonLink href="/scanner">Escanear QR Code</ButtonLink>
+        </ButtonContainer>
+      </Container>
   );
 };
 

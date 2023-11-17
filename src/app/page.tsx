@@ -2,6 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import SymptomSelection from '../app/components/SymptomSelection';
+import GlobalStyle from './globalStyles';
+import ScreenContainer from './components/ScreenContainer';
 
 const HomeContainer = styled.div`
   text-align: center;
@@ -19,10 +21,15 @@ const Home: React.FC = () => {
   };
 
   return (
+    
     <HomeContainer>
-      <HomeTitle>Bem-vindo ao Sistema de Fichas Médicas</HomeTitle>
-      <SymptomSelection onNext={handleNext} />
+      <ScreenContainer>
+        <GlobalStyle/> 
+        <HomeTitle>Bem-vindo ao Sistema de Fichas Médicas</HomeTitle>
+        <SymptomSelection onNext={handleNext} />
+      </ScreenContainer>
     </HomeContainer>
+    
   );
 };
 
