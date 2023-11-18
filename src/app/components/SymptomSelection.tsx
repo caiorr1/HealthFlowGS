@@ -92,7 +92,7 @@ const SymptomSelection: React.FC<SymptomSelectionProps> = ({ onNext }) => {
         Perda de Paladar ou Olfato
       </SymptomButton>
       <ButtonLink href='/private-or-insurance'>
-        Próximo
+        Enviar
       </ButtonLink>
     </Container>
   );

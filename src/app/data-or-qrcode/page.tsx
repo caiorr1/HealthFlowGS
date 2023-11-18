@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ButtonLink from '../components/ButtonLink';
+import GlobalStyle from '../globalStyles';
 
 interface InsuranceQRCodeProps {
   onNext: () => void;

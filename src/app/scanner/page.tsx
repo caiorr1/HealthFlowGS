@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import PatientFormWithQRData from '../components/PatientFormWithQRData';
 import InsuranceQRCodeScan from '../components/InsuranceQRCodeScan';
+import GlobalStyle from '../globalStyles';
 
 const SheetsPage: React.FC = () => {
   const [showQRCodeData, setShowQRCodeData] = useState(false);
@@ -19,6 +20,7 @@ const SheetsPage: React.FC = () => {
 
   return (
     <div>
+      <GlobalStyle/>
       <h1>Página de Envio de Fichas</h1>
 
       {showQRCodeData ? (

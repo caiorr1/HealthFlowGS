@@ -1,44 +1,36 @@
 import Link from 'next/link';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ButtonLinkProps {
   href?: string;
   onClick?: () => void;
   children: React.ReactNode;
-  customStyle?: 'blue' | 'green' | 'custom';
+  customStyle?: 'custom';
 }
 
-const StyledButton = styled.button<{ customStyle?: ButtonLinkProps['customStyle'] }>`
+const buttonStyles = {
+  custom: css`
+    background: #DFE2E8;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #1B365C;
+  `,
+};
+
+const StyledButton = styled.button<ButtonLinkProps>`
   padding: 10px;
-  border: none;
+  width: 200px;
+  height: 50px;
+  flex-shrink: 0;
+  border: 5px;
   cursor: pointer;
   font-size: 16px;
   text-decoration: none;
+  border-radius: 20px;
+  background: #3F72AF;
+  color: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-  ${(props) => {
-    switch (props.customStyle) {
-      case 'blue':
-        return `
-          background-color: #3498db;
-          color: #fff;
-        `;
-      case 'green':
-        return `
-          background-color: #2ecc71;
-          color: #fff;
-        `;
-      case 'custom':
-        return `
-          background-color: #ffcc00;
-          color: #333;
-        `;
-      default:
-        return `
-          background-color: #3498db;
-          color: #fff;
-        `;
-    }
-  }}
+  ${({ customStyle }) => customStyle && buttonStyles[customStyle]}
 `;
 
 const ButtonLink: React.FC<ButtonLinkProps> = ({ href, onClick, children, customStyle }) => {
@@ -52,12 +44,12 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({ href, onClick, children, custom
     <>
       {href ? (
         <Link href={href}>
-          <StyledButton customStyle={customStyle} onClick={handleClick}>
+          <StyledButton onClick={handleClick} customStyle={customStyle}>
             {children}
           </StyledButton>
         </Link>
       ) : (
-        <StyledButton customStyle={customStyle} onClick={handleClick}>
+        <StyledButton onClick={handleClick} customStyle={customStyle}>
           {children}
         </StyledButton>
       )}
