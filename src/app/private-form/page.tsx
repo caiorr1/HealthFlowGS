@@ -2,14 +2,15 @@
 import React from 'react';
 import PrivateForm from '../components/PrivateForm';
 import GlobalStyle from '../globalStyles';
+import MobileFrame from '../components/MobileFrame';
 
 const PrivateFormPage: React.FC = () => {
   return (
-    <div>
+    <MobileFrame>
       <GlobalStyle/>
       <h1>Preencha os Dados Particulares</h1>
       <PrivateForm onNext={() => {}} />
-    </div>
+    </MobileFrame>
   );
 };
 

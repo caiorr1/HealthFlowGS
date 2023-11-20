@@ -2,6 +2,7 @@
 import React from 'react';
 import PatientForm from '../components/PatientForm';
 import GlobalStyle from '../globalStyles';
+import MobileFrame from '../components/MobileFrame';
 
 interface PatientFormPageProps {
   type: string;
@@ -9,11 +10,11 @@ interface PatientFormPageProps {
 
 const PatientFormPage: React.FC<PatientFormPageProps> = ({ type }) => {
   return (
-    <div>
+    <MobileFrame>
       <GlobalStyle/>
       <h1>Preencha a Ficha Médica para {type}</h1>
       <PatientForm selectedDoctorType={type} />
-    </div>
+    </MobileFrame>
   );
 };
 

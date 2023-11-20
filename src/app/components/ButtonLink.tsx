@@ -13,6 +13,7 @@ const buttonStyles = {
     background: #DFE2E8;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     color: #1B365C;
+    font-family: 'Inter', sans-serif;
   `,
 };
 
@@ -28,6 +29,7 @@ const StyledButton = styled.button<ButtonLinkProps>`
   border-radius: 20px;
   background: #3F72AF;
   color: #fff;
+  font-family: 'Inter', sans-serif;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   ${({ customStyle }) => customStyle && buttonStyles[customStyle]}

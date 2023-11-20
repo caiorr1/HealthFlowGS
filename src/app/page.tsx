@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SymptomSelection from '../app/components/SymptomSelection';
 import GlobalStyle from './globalStyles';
+import MobileFrame from './components/MobileFrame';
 
 const HomeContainer = styled.div`
   text-align: center;
@@ -27,11 +28,13 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <GlobalStyle/>
-      <HomeContainer>
-        <HomeTitle>Bem-vindo ao Sistema de Fichas Médicas</HomeTitle>
-        <SymptomSelection onNext={handleNext} />
-      </HomeContainer>
+      <MobileFrame>
+        <GlobalStyle/>
+        <HomeContainer>
+          <HomeTitle>Bem-vindo ao Sistema de Fichas Médicas</HomeTitle>
+          <SymptomSelection onNext={handleNext} />
+        </HomeContainer>
+      </MobileFrame>
     </>
   );
 };
