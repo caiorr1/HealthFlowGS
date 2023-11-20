@@ -1,21 +1,25 @@
-'use client'
 import React from 'react';
+import styled from 'styled-components';
 import ButtonLink from './ButtonLink';
 
-interface PrivateOrInsuranceSelectionProps {
-  onNext: () => void;
-}
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; 
+  margin-top: 20px;
+`;
 
-const PrivateOrInsuranceSelection: React.FC<PrivateOrInsuranceSelectionProps> = ({ onNext }) => {
+const PrivateOrInsuranceSelection: React.FC = () => {
   return (
-    <div>
-      <ButtonLink href="/private-form">
+    <ButtonContainer>
+      <ButtonLink href="/private-form" customStyle="custom">
         Particular
       </ButtonLink>
-      <ButtonLink href="/data-or-qrcode">
+      <ButtonLink href="/data-or-qrcode" customStyle="custom">
         Convênio
       </ButtonLink>
-    </div>
+    </ButtonContainer>
   );
 };
 

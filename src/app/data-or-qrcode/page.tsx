@@ -16,7 +16,10 @@ const Container = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; 
+  margin-top: 20px;
 `;
 
 const HomeTitle = styled.h1`
@@ -30,6 +33,7 @@ const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
   
   return (
       <Container>
+        <GlobalStyle/>
         <HomeTitle>Escolha uma opção:</HomeTitle>
         <ButtonContainer>
           <ButtonLink href="/sheet">Digitar Dados</ButtonLink>
