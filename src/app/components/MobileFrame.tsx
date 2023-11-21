@@ -17,7 +17,6 @@ const MobileScreen = styled.div`
   width: 100%;
   height: 100%;
   background-color: #fff; 
-  overflow-y: auto;
   padding: 20px; 
   display: flex; 
   flex-direction: column; 
