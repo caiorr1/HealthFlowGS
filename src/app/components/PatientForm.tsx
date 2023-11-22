@@ -1,3 +1,4 @@
+"use client"
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -6,59 +7,47 @@ import ButtonLink from './ButtonLink';
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 600px;
+  max-width: 300px;
   margin: 0 auto;
-  gap: 10px;
-
+  gap: 6px;
 `;
 
 const Label = styled.label`
-  margin-top: 5px;
-  font-size: 26px;  
+  margin-top: 4px;
+  font-size: 18px;
   font-weight: bold;
-  height: 20px;  
+  height: 18px;
   color: #315A89;
-
 `;
 
 const Input = styled.input`
-padding: 8px;
-margin: 8px 0;
-background-color: #DFE2E8;
-border: 1px solid #ccc;
+  padding: 6px;
+  margin: 6px 0;
+  background-color: #DFE2E8;
+  border: 1px solid #ccc;
 
-:focus {
-  outline: none;
-  border-color: #3498db;
-}
-
+  :focus {
+    outline: none;
+    border-color: #3498db;
+  }
 `;
 
 const TextArea = styled.textarea`
-  padding: 8px;
-  margin: 8px 0;
-
-`;
-
-const Button = styled.button`
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 16px;
+  padding: 6px;
+  margin: 6px 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
 `;
 
 const SymptomButtons = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 8px;
+  margin-top: 6px;
 `;
 
 const SymptomButton = styled.button<{ selected: boolean }>`
-  margin: 4px;
-  padding: 6px;
+  margin: 2px;
+  padding: 4px;
   cursor: pointer;
   background-color: ${(props) => (props.selected ? '#2ecc71' : '#3498db')};
   color: #fff;
@@ -70,9 +59,9 @@ const StyledLink = styled.a`
 `;
 
 const StyledButtonLinkContainer = styled.div`
-  padding: 15px;
-  width: 320px;
-  height: 80px;
+  padding: 10px;
+  width: 260px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -95,10 +84,8 @@ const PatientForm: React.FC<PatientFormProps> = ({ selectedDoctorType }) => {
 
   const handleSymptomClick = (symptom: string) => {
     if (selectedSymptoms.includes(symptom)) {
-      // Remove o sintoma se já estiver selecionado
       setSelectedSymptoms(selectedSymptoms.filter((s) => s !== symptom));
     } else {
-      // Adiciona o sintoma se ainda não estiver selecionado
       setSelectedSymptoms([...selectedSymptoms, symptom]);
     }
   };
@@ -110,10 +97,7 @@ const PatientForm: React.FC<PatientFormProps> = ({ selectedDoctorType }) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Simula o envio da ficha (substitua isso pela lógica real)
     try {
-      // Lógica para enviar a ficha ao médico (simulada por um atraso)
-      // Substitua isso pela lógica real de envio
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setIsFormSubmitted(true);
     } catch (error) {
@@ -121,41 +105,49 @@ const PatientForm: React.FC<PatientFormProps> = ({ selectedDoctorType }) => {
     }
   };
 
-  
-    return (
-      <Form onSubmit={handleSubmit}>
-        <Label>Nome:</Label>
-        <Input type="text"/>
-        
-        <Label>CPF:</Label>
-        <Input type="text" />
+  return (
+    <Form onSubmit={handleSubmit}>
+      <Label>Nome:</Label>
+      <Input type="text" />
 
-        <Label>Convênio:</Label>
-        <Input type="text" />
+      <Label>CPF:</Label>
+      <Input type="text" />
 
-        <Label>Número da Carteirinha:</Label>
-        <Input type="text" />
+      <Label>Convênio:</Label>
+      <Input type="text" />
 
-        <Label>Nível da Dor:</Label>
-        <input
+      <Label>Número da Carteirinha:</Label>
+      <Input type="text" />
+
+      <Label>Outros Sintomas:</Label>
+      <TextArea
+        rows={4}
+        placeholder="Digite outros sintomas aqui..."
+        value={otherSymptoms}
+        onChange={handleOtherSymptomsChange}
+      />
+
+      <Label>Nível da Dor:</Label>
+      <input
         type="range"
         min="0"
         max="10"
         value={painLevel || 0}
         onChange={handlePainLevelChange}
-        />
-        <span>{painLevel !== null ? `Nível: ${painLevel}` : 'Selecione um nível'}</span>
-        <StyledButtonLinkContainer>
-        <ButtonLink type="submit">
-        {isFormSubmitted ? (
-          <ButtonLink href="/sheet-confirmation">ENVIAR FICHA</ButtonLink>
-        ) : (
-          'ENVIAR FICHA'
-        )}
+      />
+      <StyledButtonLinkContainer>
+        <ButtonLink customStyle="small">
+          {isFormSubmitted ? (
+            <ButtonLink href="/sheet-confirmation" customStyle="small">
+              ENVIAR FICHA
+            </ButtonLink>
+          ) : (
+            'ENVIAR FICHA'
+          )}
         </ButtonLink>
-        </StyledButtonLinkContainer>
-      </Form>
-    );
-  };
-  
-  export default PatientForm;
+      </StyledButtonLinkContainer>
+    </Form>
+  );
+};
+
+export default PatientForm;
