@@ -19,18 +19,20 @@ const buttonStyles = {
 
 const StyledButton = styled.button<ButtonLinkProps>`
   padding: 10px;
-  width: 200px;
-  height: 50px;
+  width: 320px;
+  height: 80px;
   flex-shrink: 0;
   border: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 28px;
   text-decoration: none;
   border-radius: 20px;
   background: #3F72AF;
   color: #fff;
   font-family: 'Inter', sans-serif;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+
 
   ${({ customStyle }) => customStyle && buttonStyles[customStyle]}
 `;

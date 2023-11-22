@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const MobileContainer = styled.div`
   width: 600px; 
   height: 800px; 
-  border: 1px solid #333;
   border-radius: 40px; 
   overflow: hidden; 
   margin: 20px auto; 
@@ -16,7 +15,7 @@ const MobileContainer = styled.div`
 const MobileScreen = styled.div`
   width: 100%;
   height: 100%;
-  background-color: #fff; 
+  background-color: #F9F7F7; 
   padding: 20px; 
   display: flex; 
   flex-direction: column; 
