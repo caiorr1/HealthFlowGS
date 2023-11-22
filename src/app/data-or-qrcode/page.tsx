@@ -9,23 +9,29 @@ interface InsuranceQRCodeProps {
   onNext: () => void;
 }
 
+const Logo = styled.img`
+  max-width: 70%;
+  height: auto;
+  margin-bottom: 00px; 
+`;
 
 const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px; 
-  margin-top: 20px;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 60px;
+margin-top: 10vh; 
+justify-content: center;
 `;
 
 const HomeTitle = styled.h1`
   color: #315A89;
   text-align: center;
-  font-family: Inter, sans-serif;
-  font-size: 32px;
+  font-family: Arial;
+  font-size: 28px;
   font-style: normal;
-  font-weight: 700;
   line-height: normal;
+  font-weight: bold;
 `;
 
 const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
@@ -34,6 +40,11 @@ const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
   return (
       <MobileFrame>
         <GlobalStyle/>
+        <Logo
+            src="/Logo_Healthflow.png"
+            alt="Logo"
+            unoptimized={true}
+            />
         <HomeTitle>Escolha uma opção:</HomeTitle>
         <ButtonContainer>
           <ButtonLink href="/sheet" customStyle="custom">Digitar Dados</ButtonLink>

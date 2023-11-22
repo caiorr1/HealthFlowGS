@@ -5,6 +5,12 @@ import PrivateOrInsuranceSelection from '../components/PrivateOrInsuranceSelecti
 import GlobalStyle from '../globalStyles';
 import MobileFrame from '../components/MobileFrame';
 
+const Logo = styled.img`
+  max-width: 70%;
+  height: auto;
+  margin-bottom: 00px; 
+`;
+
 const HomeContainer = styled.div`
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -12,15 +18,26 @@ const HomeContainer = styled.div`
 `;
 
 const HomeTitle = styled.h1`
-  color: #3498db;  
+  color: #315A89;
+  text-align: center;
+  font-family: Arial;
+  font-size: 28px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: bold;
 `;
 
 const PrivateOrInsuranceSelectionPage: React.FC = () => {
   return (
     <MobileFrame>
       <HomeContainer>
+        <Logo
+            src="/Logo_Healthflow.png"
+            alt="Logo"
+            unoptimized={true}
+            />
         <GlobalStyle/>
-        <HomeTitle>Escolha entre Particular ou Convênio</HomeTitle>
+        <HomeTitle>Escolha entre Particular ou Convênio:</HomeTitle>
         <PrivateOrInsuranceSelection onNext={() => {}} />
       </HomeContainer>
     </MobileFrame>

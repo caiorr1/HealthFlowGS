@@ -1,27 +1,43 @@
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import ButtonLink from './ButtonLink';
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
+  gap: 10px;
+
 `;
 
 const Label = styled.label`
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 5px;
+  font-size: 26px;  
+  font-weight: bold;
+  height: 20px;  
+  color: #315A89;
+
 `;
 
 const Input = styled.input`
-  padding: 8px;
-  margin: 8px 0;
+padding: 8px;
+margin: 8px 0;
+background-color: #DFE2E8;
+border: 1px solid #ccc;
+
+:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
 `;
 
 const TextArea = styled.textarea`
   padding: 8px;
   margin: 8px 0;
+
 `;
 
 const Button = styled.button`
@@ -51,6 +67,15 @@ const SymptomButton = styled.button<{ selected: boolean }>`
 const StyledLink = styled.a`
   text-decoration: none;
   color: #fff;
+`;
+
+const StyledButtonLinkContainer = styled.div`
+  padding: 15px;
+  width: 320px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 interface PatientFormProps {
@@ -120,13 +145,15 @@ const PatientForm: React.FC<PatientFormProps> = ({ selectedDoctorType }) => {
         onChange={handlePainLevelChange}
         />
         <span>{painLevel !== null ? `Nível: ${painLevel}` : 'Selecione um nível'}</span>
-        <Button type="submit">
+        <StyledButtonLinkContainer>
+        <ButtonLink type="submit">
         {isFormSubmitted ? (
-          <Link href="/sheet-confirmation">Enviar ficha</Link>
+          <ButtonLink href="/sheet-confirmation">ENVIAR FICHA</ButtonLink>
         ) : (
-          'Enviar Ficha'
+          'ENVIAR FICHA'
         )}
-        </Button>
+        </ButtonLink>
+        </StyledButtonLinkContainer>
       </Form>
     );
   };

@@ -10,8 +10,9 @@ const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px; 
-  margin-top: 20px;
+  gap: 60px;
+  margin-top: 10vh; 
+  justify-content: center; /* Centralizar verticalmente */
 `;
 
 const PrivateOrInsuranceSelection: React.FC<PrivateOrInsuranceSelectionProps> = ({ onNext }) => {

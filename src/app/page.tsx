@@ -5,6 +5,14 @@ import SymptomSelection from '../app/components/SymptomSelection';
 import GlobalStyle from './globalStyles';
 import MobileFrame from './components/MobileFrame';
 
+
+const Logo = styled.img`
+  max-width: 70%;
+  height: auto;
+  margin-bottom: 00px; 
+`;
+
+
 const HomeContainer = styled.div`
   text-align: center;
   font-family: 'Poppins', sans-serif;
@@ -15,10 +23,10 @@ const HomeTitle = styled.h1`
   color: #315A89;
   text-align: center;
   font-family: Arial;
-  font-size: 32px;
+  font-size: 30px;
   font-style: normal;
-  font-weight: 700;
   line-height: normal;
+  font-weight: bold;
 `;
 
 const Home: React.FC = () => {
@@ -31,6 +39,11 @@ const Home: React.FC = () => {
       <MobileFrame>
         <GlobalStyle/>
         <HomeContainer>
+        <Logo
+          src="/Logo_Healthflow.png"
+          alt="Logo"
+          unoptimized={true}
+          />
           <HomeTitle>Bem-vindo ao Sistema de Fichas Médicas</HomeTitle>
           <SymptomSelection onNext={handleNext} />
         </HomeContainer>
@@ -40,3 +53,5 @@ const Home: React.FC = () => {
 };
 
 export default Home;
+import Image from 'next/image'
+ 
