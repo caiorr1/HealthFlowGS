@@ -2,9 +2,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ButtonLink from './ButtonLink';
+import MobileFrame from './MobileFrame';
 
 interface InsuranceQRCodeScanProps {
-  onScanComplete: () => void;
+  onScanComplete: (data: { nome: string; cpf: string; convenio: string }) => void;
 }
 
 const Container = styled.div`
@@ -36,6 +37,16 @@ const UserInfo = styled.p`
   margin: 10px 0;
 `;
 
+const HomeTitle = styled.h1`
+  color: #315A89;
+  text-align: center;
+  font-family: Arial;
+  font-size: 28px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: bold;
+`;
+
 const InsuranceQRCodeScan: React.FC<InsuranceQRCodeScanProps> = ({ onScanComplete }) => {
   const [scanComplete, setScanComplete] = useState(false);
 
@@ -48,21 +59,23 @@ const InsuranceQRCodeScan: React.FC<InsuranceQRCodeScanProps> = ({ onScanComplet
   }, []);
 
   return (
-    <Container>
-      <ScanMessage>Aproxime seu QR Code ao scanner</ScanMessage>
-      <ScannerImage src="/scanner.jpg" alt="QR Code Scanner" />
+    <MobileFrame>
+      <Container>
+        <ScanMessage>Aproxime seu QR Code ao scanner</ScanMessage>
+        <ScannerImage src="/scanner.jpg" alt="QR Code Scanner" />
 
-      {scanComplete && (
-        <UserInfoContainer>
-          <h2>Dados do Usuário:</h2>
-          <UserInfo>Nome: João da Silva</UserInfo>
-          <UserInfo>CPF: 123.456.789-00</UserInfo>
-          <UserInfo>Convênio: Plano de Saúde XYZ</UserInfo>
-          <UserInfo>Número da Carteirinha: 987654321</UserInfo>
-          <ButtonLink customStyle='custom' onClick={onScanComplete}>Próximo</ButtonLink>
-        </UserInfoContainer>
-      )}
-    </Container>
+        {scanComplete && (
+          <UserInfoContainer>
+            <HomeTitle>Seus dados:</HomeTitle>
+            <UserInfo>Nome: João da Silva</UserInfo>
+            <UserInfo>CPF: 123.456.789-00</UserInfo>
+            <UserInfo>Convênio: Plano de Saúde XYZ</UserInfo>
+            <UserInfo>Número da Carteirinha: 987654321</UserInfo>
+            <ButtonLink customStyle='small' onClick={() => onScanComplete({ nome: '', cpf: '', convenio: '' })}>Próximo</ButtonLink>
+          </UserInfoContainer>
+        )}
+      </Container>
+    </MobileFrame>
   );
 };
 

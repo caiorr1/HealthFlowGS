@@ -43,7 +43,6 @@ const InsuranceQRCode: React.FC<InsuranceQRCodeProps> = ({ onNext }) => {
         <Logo
             src="/Logo_Healthflow.png"
             alt="Logo"
-            unoptimized={true}
             />
         <HomeTitle>Escolha uma opção:</HomeTitle>
         <ButtonContainer>

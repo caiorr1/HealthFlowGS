@@ -1,5 +1,52 @@
 // components/PrivateForm.tsx
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin: 20px;
+`;
+
+const FormLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 18px;
+  color: #315A89;
+`;
+
+const FormInput = styled.input`
+  padding: 8px;
+  margin-top: 4px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const FormTextArea = styled.textarea`
+  padding: 8px;
+  margin-top: 4px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const SubmitButton = styled.button`
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 4px;
+
+  :hover {
+    background-color: #2a77ad;
+  }
+`;
 
 interface PrivateFormProps {
   onNext: () => void;
@@ -11,9 +58,11 @@ const PrivateForm: React.FC<PrivateFormProps> = ({ onNext }) => {
     cpf: '',
     telefone: '',
     rg: '',
+    outrosSintomas: '',
+    nivelDor: '',
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
@@ -23,31 +72,46 @@ const PrivateForm: React.FC<PrivateFormProps> = ({ onNext }) => {
   };
 
   return (
-    <div>
+    <FormContainer>
       <h2>Preencha os dados particulares:</h2>
 
-      <label>
+      <FormLabel>
         Nome:
-        <input type="text" name="name" value={formData.name} onChange={handleInputChange} />
-      </label>
+        <FormInput type="text" name="name" value={formData.name} onChange={handleInputChange} />
+      </FormLabel>
 
-      <label>
+      <FormLabel>
         CPF:
-        <input type="text" name="cpf" value={formData.cpf} onChange={handleInputChange} />
-      </label>
+        <FormInput type="text" name="cpf" value={formData.cpf} onChange={handleInputChange} />
+      </FormLabel>
 
-      <label>
+      <FormLabel>
         Telefone:
-        <input type="text" name="telefone" value={formData.telefone} onChange={handleInputChange} />
-      </label>
+        <FormInput type="text" name="telefone" value={formData.telefone} onChange={handleInputChange} />
+      </FormLabel>
 
-      <label>
+      <FormLabel>
         RG:
-        <input type="text" name="rg" value={formData.rg} onChange={handleInputChange} />
-      </label>
+        <FormInput type="text" name="rg" value={formData.rg} onChange={handleInputChange} />
+      </FormLabel>
 
-      <button onClick={handleSubmit}>Enviar</button>
-    </div>
+      <FormLabel>
+        Outros Sintomas:
+        <FormTextArea
+          rows={4}
+          name="outrosSintomas"
+          value={formData.outrosSintomas}
+          onChange={handleInputChange}
+        />
+      </FormLabel>
+
+      <FormLabel>
+        Nível de Dor:
+        <FormInput type="text" name="nivelDor" value={formData.nivelDor} onChange={handleInputChange} />
+      </FormLabel>
+
+      <SubmitButton onClick={handleSubmit}>Enviar</SubmitButton>
+    </FormContainer>
   );
 };
 

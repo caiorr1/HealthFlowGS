@@ -34,7 +34,6 @@ const PrivateOrInsuranceSelectionPage: React.FC = () => {
         <Logo
             src="/Logo_Healthflow.png"
             alt="Logo"
-            unoptimized={true}
             />
         <GlobalStyle/>
         <HomeTitle>Escolha entre Particular ou Convênio:</HomeTitle>

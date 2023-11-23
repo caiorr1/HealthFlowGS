@@ -32,7 +32,6 @@ const PatientFormPage: React.FC<PatientFormPageProps> = ({ type }) => {
               <Logo
             src="/Logo_Healthflow.png"
             alt="Logo"
-            unoptimized={true}
             />
       <GlobalStyle/>
       <HomeTitle>Preencha a Ficha Médica{type}</HomeTitle>

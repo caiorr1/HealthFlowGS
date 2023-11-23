@@ -1,27 +1,40 @@
 // components/PatientFormWithQRData.tsx
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import ButtonLink from './ButtonLink';
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 400px;
+  max-width: 300px;
   margin: 0 auto;
+  gap: 10px;
 `;
 
 const Label = styled.label`
-  margin-top: 8px;
-  font-size: 14px;
+  margin-top: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #315A89;
 `;
 
 const Input = styled.input`
   padding: 8px;
   margin: 8px 0;
+  background-color: #DFE2E8;
+  border: 1px solid #ccc;
+
+  :focus {
+    outline: none;
+    border-color: #3498db;
+  }
 `;
 
 const TextArea = styled.textarea`
   padding: 8px;
   margin: 8px 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
 `;
 
 const Button = styled.button`
@@ -34,9 +47,14 @@ const Button = styled.button`
   margin-top: 16px;
 `;
 
-const StyledLink = styled.a`
-  text-decoration: none;
-  color: #fff;
+const StyledButtonLinkContainer = styled.div`
+  padding: 10px;
+  width: 260px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 `;
 
 interface PatientFormWithQRDataProps {
@@ -44,10 +62,11 @@ interface PatientFormWithQRDataProps {
     nome: string;
     cpf: string;
     convenio: string;
-  };
+  } | null; // Ajuste aqui
+  onScanComplete: () => void;
 }
 
-const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeData }) => {
+const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeData, onScanComplete }) => {
   const [painLevel, setPainLevel] = useState<number | null>(null);
   const [otherSymptoms, setOtherSymptoms] = useState<string>('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
@@ -70,6 +89,7 @@ const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeDat
       // Substitua isso pela lógica real de envio
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setIsFormSubmitted(true);
+      onScanComplete(); // Chame onScanComplete quando o envio for bem-sucedido
     } catch (error) {
       console.error('Erro ao enviar a ficha:', error);
     }
@@ -78,34 +98,25 @@ const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeDat
   return (
     <Form onSubmit={handleSubmit}>
       <Label>Nome:</Label>
-      <Input type="text" defaultValue={qrCodeData.nome} readOnly />
+      <Input type="text" defaultValue={qrCodeData?.nome || ''} readOnly />
 
       <Label>CPF:</Label>
-      <Input type="text" defaultValue={qrCodeData.cpf} readOnly />
+      <Input type="text" defaultValue={qrCodeData?.cpf || ''} readOnly />
 
       <Label>Convênio:</Label>
-      <Input type="text" defaultValue={qrCodeData.convenio} readOnly />
+      <Input type="text" defaultValue={qrCodeData?.convenio || ''} readOnly />
 
       <Label>Nível da Dor:</Label>
-      <input
-        type="range"
-        min="0"
-        max="10"
-        value={painLevel || 0}
-        onChange={handlePainLevelChange}
-      />
-      <span>{painLevel !== null ? `Nível: ${painLevel}` : 'Selecione um nível'}</span>
+      <Input type="text" value={painLevel !== null ? `Nível: ${painLevel}` : 'Selecione um nível'} readOnly />
 
       <Label>Outros Sintomas:</Label>
       <TextArea value={otherSymptoms} onChange={handleOtherSymptomsChange} />
 
-      <Button type="submit">
-        {isFormSubmitted ? (
-          <StyledLink href="/sheet-confirmation">Enviar ficha</StyledLink>
-        ) : (
-          'Enviar Ficha'
-        )}
-      </Button>
+      <StyledButtonLinkContainer>
+        <ButtonLink customStyle="small" href='/sheet-confirmation'>
+          {isFormSubmitted ? 'Enviar ficha' : 'Enviar Ficha'}
+        </ButtonLink>
+      </StyledButtonLinkContainer>
     </Form>
   );
 };
