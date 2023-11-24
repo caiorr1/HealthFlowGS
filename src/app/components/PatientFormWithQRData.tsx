@@ -37,16 +37,6 @@ const TextArea = styled.textarea`
   font-size: 14px;
 `;
 
-const Button = styled.button`
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 16px;
-`;
-
 const StyledButtonLinkContainer = styled.div`
   padding: 10px;
   width: 260px;
@@ -62,7 +52,8 @@ interface PatientFormWithQRDataProps {
     nome: string;
     cpf: string;
     convenio: string;
-  } | null; // Ajuste aqui
+    numero_cart: string;
+  } | null;
   onScanComplete: () => void;
 }
 
@@ -83,13 +74,12 @@ const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeDat
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Simula o envio da ficha (substitua isso pela lógica real)
+    // Simula o envio da ficha
     try {
       // Lógica para enviar a ficha ao médico (simulada por um atraso)
-      // Substitua isso pela lógica real de envio
       await new Promise((resolve) => setTimeout(resolve, 2000));
       setIsFormSubmitted(true);
-      onScanComplete(); // Chame onScanComplete quando o envio for bem-sucedido
+      onScanComplete();
     } catch (error) {
       console.error('Erro ao enviar a ficha:', error);
     }
@@ -106,15 +96,24 @@ const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeDat
       <Label>Convênio:</Label>
       <Input type="text" defaultValue={qrCodeData?.convenio || ''} readOnly />
 
+      <Label>Número da Carteirinha:</Label>
+      <Input type="text" defaultValue={qrCodeData?.numero_cart || ''} readOnly />
+
       <Label>Nível da Dor:</Label>
-      <Input type="text" value={painLevel !== null ? `Nível: ${painLevel}` : 'Selecione um nível'} readOnly />
+      <input
+        type="range"
+        min="0"
+        max="10"
+        value={painLevel || 0}
+        onChange={handlePainLevelChange}
+      />
 
       <Label>Outros Sintomas:</Label>
       <TextArea value={otherSymptoms} onChange={handleOtherSymptomsChange} />
 
       <StyledButtonLinkContainer>
         <ButtonLink customStyle="small" href='/sheet-confirmation'>
-          {isFormSubmitted ? 'Enviar ficha' : 'Enviar Ficha'}
+          {isFormSubmitted ? 'ENVIAR FICHA' : 'ENVIAR FICHA'}
         </ButtonLink>
       </StyledButtonLinkContainer>
     </Form>
