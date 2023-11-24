@@ -149,15 +149,9 @@ const PrivateForm = () => {
       />
 
       <StyledButtonLinkContainer>
-        <ButtonLink customStyle="small">
-          {isFormSubmitted ? (
-            <ButtonLink href="/sheet-confirmation" customStyle="small">
-              ENVIAR FICHA
-            </ButtonLink>
-          ) : (
-            'ENVIAR FICHA'
-          )}
-        </ButtonLink>
+      <ButtonLink customStyle="small" href='/sheet-confirmation'>
+          {isFormSubmitted ? 'ENVIAR FICHA' : 'ENVIAR FICHA'}
+      </ButtonLink>
       </StyledButtonLinkContainer>
     </Form>
   );
