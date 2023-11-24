@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
 import ButtonLink from './ButtonLink';
 
 const Form = styled.form`
@@ -39,24 +38,6 @@ const TextArea = styled.textarea`
   font-size: 14px;
 `;
 
-const SymptomButtons = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 6px;
-`;
-
-const SymptomButton = styled.button<{ selected: boolean }>`
-  margin: 2px;
-  padding: 4px;
-  cursor: pointer;
-  background-color: ${(props) => (props.selected ? '#2ecc71' : '#3498db')};
-  color: #fff;
-`;
-
-const StyledLink = styled.a`
-  text-decoration: none;
-  color: #fff;
-`;
 
 const StyledButtonLinkContainer = styled.div`
   padding: 10px;
@@ -67,13 +48,9 @@ const StyledButtonLinkContainer = styled.div`
   align-items: center;
 `;
 
-interface PatientFormProps {
-  selectedDoctorType: string | null;
-}
 
-const PatientForm: React.FC<PatientFormProps> = ({ selectedDoctorType }) => {
+const PatientForm = () => {
   const [painLevel, setPainLevel] = useState<number | null>(null);
-  const [selectedSymptoms, setSelectedSymptoms] = useState<string[]>([]);
   const [otherSymptoms, setOtherSymptoms] = useState<string>('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
@@ -82,15 +59,7 @@ const PatientForm: React.FC<PatientFormProps> = ({ selectedDoctorType }) => {
     setPainLevel(level);
   };
 
-  const handleSymptomClick = (symptom: string) => {
-    if (selectedSymptoms.includes(symptom)) {
-      setSelectedSymptoms(selectedSymptoms.filter((s) => s !== symptom));
-    } else {
-      setSelectedSymptoms([...selectedSymptoms, symptom]);
-    }
-  };
-
-  const handleOtherSymptomsChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleOtherSymptomsChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setOtherSymptoms(event.target.value);
   };
 

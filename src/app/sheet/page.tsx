@@ -34,8 +34,8 @@ const PatientFormPage: React.FC<PatientFormPageProps> = ({ type }) => {
             alt="Logo"
             />
       <GlobalStyle/>
-      <HomeTitle>Preencha a Ficha Médica{type}</HomeTitle>
-      <PatientForm selectedDoctorType={type} />
+      <HomeTitle>Preencha a Ficha Médica</HomeTitle>
+      <PatientForm/>
     </MobileFrame>
   );
 };

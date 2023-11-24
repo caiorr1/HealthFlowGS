@@ -1,117 +1,121 @@
 // components/PrivateForm.tsx
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
+import ButtonLink from './ButtonLink';
 
-const FormContainer = styled.div`
+const Form = styled.form`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  margin: 20px;
+  max-width: 300px;
+  margin: 0 auto;
+  gap: 6px;
 `;
 
-const FormLabel = styled.label`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+const Label = styled.label`
+  margin-top: 4px;
   font-size: 18px;
+  font-weight: bold;
+  height: 18px;
   color: #315A89;
 `;
 
-const FormInput = styled.input`
-  padding: 8px;
-  margin-top: 4px;
-  width: 100%;
+const Input = styled.input`
+  padding: 6px;
+  margin: 6px 0;
+  background-color: #DFE2E8;
   border: 1px solid #ccc;
-  border-radius: 4px;
-`;
 
-const FormTextArea = styled.textarea`
-  padding: 8px;
-  margin-top: 4px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-`;
-
-const SubmitButton = styled.button`
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  border-radius: 4px;
-
-  :hover {
-    background-color: #2a77ad;
+  :focus {
+    outline: none;
+    border-color: #3498db;
   }
 `;
 
-interface PrivateFormProps {
-  onNext: () => void;
-}
+const TextArea = styled.textarea`
+  padding: 6px;
+  margin: 6px 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 14px;
+`;
 
-const PrivateForm: React.FC<PrivateFormProps> = ({ onNext }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    cpf: '',
-    telefone: '',
-    rg: '',
-    outrosSintomas: '',
-    nivelDor: '',
-  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+const StyledButtonLinkContainer = styled.div`
+  padding: 10px;
+  width: 260px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+
+const PrivateForm = () => {
+  const [painLevel, setPainLevel] = useState<number | null>(null);
+  const [otherSymptoms, setOtherSymptoms] = useState<string>('');
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  const handlePainLevelChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const level = parseInt(event.target.value, 10);
+    setPainLevel(level);
   };
 
-  const handleSubmit = () => {
-    onNext();
+  const handleOtherSymptomsChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setOtherSymptoms(event.target.value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setIsFormSubmitted(true);
+    } catch (error) {
+      console.error('Erro ao enviar a ficha:', error);
+    }
   };
 
   return (
-    <FormContainer>
-      <h2>Preencha os dados particulares:</h2>
+    <Form onSubmit={handleSubmit}>
+      <Label>Nome:</Label>
+      <Input type="text" />
 
-      <FormLabel>
-        Nome:
-        <FormInput type="text" name="name" value={formData.name} onChange={handleInputChange} />
-      </FormLabel>
+      <Label>CPF:</Label>
+      <Input type="text" />
 
-      <FormLabel>
-        CPF:
-        <FormInput type="text" name="cpf" value={formData.cpf} onChange={handleInputChange} />
-      </FormLabel>
+      <Label>RG:</Label>
+      <Input type="text" />
 
-      <FormLabel>
-        Telefone:
-        <FormInput type="text" name="telefone" value={formData.telefone} onChange={handleInputChange} />
-      </FormLabel>
+      <Label>Telefone:</Label>
+      <Input type="text" />
 
-      <FormLabel>
-        RG:
-        <FormInput type="text" name="rg" value={formData.rg} onChange={handleInputChange} />
-      </FormLabel>
+      <Label>Outros Sintomas:</Label>
+      <TextArea
+        rows={4}
+        placeholder="Digite outros sintomas aqui..."
+        value={otherSymptoms}
+        onChange={handleOtherSymptomsChange}
+      />
 
-      <FormLabel>
-        Outros Sintomas:
-        <FormTextArea
-          rows={4}
-          name="outrosSintomas"
-          value={formData.outrosSintomas}
-          onChange={handleInputChange}
-        />
-      </FormLabel>
-
-      <FormLabel>
-        Nível de Dor:
-        <FormInput type="text" name="nivelDor" value={formData.nivelDor} onChange={handleInputChange} />
-      </FormLabel>
-
-      <SubmitButton onClick={handleSubmit}>Enviar</SubmitButton>
-    </FormContainer>
+      <Label>Nível da Dor:</Label>
+      <input
+        type="range"
+        min="0"
+        max="10"
+        value={painLevel || 0}
+        onChange={handlePainLevelChange}
+      />
+      <StyledButtonLinkContainer>
+        <ButtonLink customStyle="small">
+          {isFormSubmitted ? (
+            <ButtonLink href="/sheet-confirmation" customStyle="small">
+              ENVIAR FICHA
+            </ButtonLink>
+          ) : (
+            'ENVIAR FICHA'
+          )}
+        </ButtonLink>
+      </StyledButtonLinkContainer>
+    </Form>
   );
 };
 
