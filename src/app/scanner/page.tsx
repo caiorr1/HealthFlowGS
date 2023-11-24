@@ -15,9 +15,9 @@ const Logo = styled.img`
 
 const SheetsPage: React.FC = () => {
   const [showQRCodeData, setShowQRCodeData] = useState(false);
-  const [qrCodeData, setQRCodeData] = useState<{ nome: string; cpf: string; convenio: string; numero_cart: string } | null>(null);
+  const [qrCodeData, setQRCodeData] = useState<{ nome: string; cpf: string; convenio: string; numero_cart: string; sexo: string; rg: string;tipoSangue: string; escolaridade: string;} | null>(null);
 
-  const handleScanComplete = (data: { nome: string; cpf: string; convenio: string; numero_cart: string }) => {
+  const handleScanComplete = (data: { nome: string; cpf: string; convenio: string; numero_cart: string; sexo: string; rg: string;tipoSangue: string; escolaridade: string; }) => {
     setQRCodeData(data);
     setShowQRCodeData(true);
   };

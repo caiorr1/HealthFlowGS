@@ -5,7 +5,7 @@ import ButtonLink from './ButtonLink';
 import MobileFrame from './MobileFrame';
 
 interface InsuranceQRCodeScanProps {
-  onScanComplete: (data: { nome: string; cpf: string; convenio: string ; numero_cart: string}) => void;
+  onScanComplete: (data: { nome: string; cpf: string; convenio: string; numero_cart: string; sexo: string; rg: string;tipoSangue: string; escolaridade: string; }) => void;
 }
 
 const Container = styled.div`
@@ -73,7 +73,7 @@ const InsuranceQRCodeScan: React.FC<InsuranceQRCodeScanProps> = ({ onScanComplet
             <UserInfo>CPF: 123.456.789-00</UserInfo>
             <UserInfo>Convênio: Plano de Saúde XYZ</UserInfo>
             <UserInfo>Número da Carteirinha: 987654321</UserInfo>
-            <ButtonLink customStyle='small' onClick={() => onScanComplete({ nome: 'Fulano da Gama', cpf: '123.456.789-00', convenio: 'Notre Dame', numero_cart:'987654321'})}>PRÓXIMO</ButtonLink>
+            <ButtonLink customStyle='small' onClick={() => onScanComplete({ nome: 'Fulano da Gama', cpf: '123.456.789-00', convenio: 'Notre Dame', numero_cart:'987654321',  sexo: 'masculino', rg: '1234567', tipoSangue: 'O+', escolaridade: 'Ensino Fundamental'})}>PRÓXIMO</ButtonLink>
           </UserInfoContainer>
         )}
       </Container>

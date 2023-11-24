@@ -1,4 +1,4 @@
-"use client"
+// components/PatientForm.tsx
 import React, { useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import ButtonLink from './ButtonLink';
@@ -38,7 +38,6 @@ const TextArea = styled.textarea`
   font-size: 14px;
 `;
 
-
 const StyledButtonLinkContainer = styled.div`
   padding: 10px;
   width: 260px;
@@ -48,27 +47,69 @@ const StyledButtonLinkContainer = styled.div`
   align-items: center;
 `;
 
-
 const PatientForm = () => {
-  const [painLevel, setPainLevel] = useState<number | null>(null);
-  const [otherSymptoms, setOtherSymptoms] = useState<string>('');
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [convenio, setConvenio] = useState('');
+  const [numeroCart, setNumeroCart] = useState('');
+  const [outrosSintomas, setOutrosSintomas] = useState('');
+  const [nivelDor, setNivelDor] = useState<number | null>(null);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-  const handlePainLevelChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const level = parseInt(event.target.value, 10);
-    setPainLevel(level);
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'nome':
+        setNome(value);
+        break;
+      case 'cpf':
+        setCpf(value);
+        break;
+      case 'convenio':
+        setConvenio(value);
+        break;
+      case 'numeroCart':
+        setNumeroCart(value);
+        break;
+      case 'outrosSintomas':
+        setOutrosSintomas(value);
+        break;
+      default:
+        break;
+    }
   };
 
-  const handleOtherSymptomsChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-    setOtherSymptoms(event.target.value);
+  const handleNivelDorChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const level = parseInt(event.target.value, 10);
+    setNivelDor(level);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setIsFormSubmitted(true);
+      const formData = {
+        nome: nome,
+        cpf: cpf,
+        convenio: convenio,
+        numero_cart: numeroCart,
+        outros_sintomas: outrosSintomas,
+        nivel_dor: nivelDor,
+      };
+
+      const response = await fetch('http://localhost:8080/pacientes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsFormSubmitted(true);
+      } else {
+        console.error('Erro ao enviar a ficha:', response.status, response.statusText);
+      }
     } catch (error) {
       console.error('Erro ao enviar a ficha:', error);
     }
@@ -77,23 +118,24 @@ const PatientForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Label>Nome:</Label>
-      <Input type="text" />
+      <Input type="text" name="nome" value={nome} onChange={handleInputChange} />
 
       <Label>CPF:</Label>
-      <Input type="text" />
+      <Input type="text" name="cpf" value={cpf} onChange={handleInputChange} />
 
       <Label>Convênio:</Label>
-      <Input type="text" />
+      <Input type="text" name="convenio" value={convenio} onChange={handleInputChange} />
 
       <Label>Número da Carteirinha:</Label>
-      <Input type="text" />
+      <Input type="text" name="numeroCart" value={numeroCart} onChange={handleInputChange} />
 
       <Label>Outros Sintomas:</Label>
       <TextArea
         rows={4}
+        name="outrosSintomas"
         placeholder="Digite outros sintomas aqui..."
-        value={otherSymptoms}
-        onChange={handleOtherSymptomsChange}
+        value={outrosSintomas}
+        onChange={handleInputChange}
       />
 
       <Label>Nível da Dor:</Label>
@@ -101,19 +143,14 @@ const PatientForm = () => {
         type="range"
         min="0"
         max="10"
-        value={painLevel || 0}
-        onChange={handlePainLevelChange}
+        value={nivelDor || 0}
+        onChange={handleNivelDorChange}
       />
+
       <StyledButtonLinkContainer>
-        <ButtonLink customStyle="small">
-          {isFormSubmitted ? (
             <ButtonLink href="/sheet-confirmation" customStyle="small">
               ENVIAR FICHA
             </ButtonLink>
-          ) : (
-            'ENVIAR FICHA'
-          )}
-        </ButtonLink>
       </StyledButtonLinkContainer>
     </Form>
   );

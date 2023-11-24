@@ -38,7 +38,6 @@ const TextArea = styled.textarea`
   font-size: 14px;
 `;
 
-
 const StyledButtonLinkContainer = styled.div`
   padding: 10px;
   width: 260px;
@@ -48,11 +47,34 @@ const StyledButtonLinkContainer = styled.div`
   align-items: center;
 `;
 
-
 const PrivateForm = () => {
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [rg, setRg] = useState('');
+  const [telefone, setTelefone] = useState('');
   const [painLevel, setPainLevel] = useState<number | null>(null);
   const [otherSymptoms, setOtherSymptoms] = useState<string>('');
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'nome':
+        setNome(value);
+        break;
+      case 'cpf':
+        setCpf(value);
+        break;
+      case 'rg':
+        setRg(value);
+        break;
+      case 'telefone':
+        setTelefone(value);
+        break;
+      default:
+        break;
+    }
+  };
 
   const handlePainLevelChange = (event: ChangeEvent<HTMLInputElement>) => {
     const level = parseInt(event.target.value, 10);
@@ -67,8 +89,28 @@ const PrivateForm = () => {
     event.preventDefault();
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setIsFormSubmitted(true);
+      const formData = {
+        nome: nome,
+        cpf: cpf,
+        rg: rg,
+        telefone,
+        outros_sintomas: otherSymptoms,
+        nivel_dor: painLevel,
+      };
+
+      const response = await fetch('http://localhost:8080/pacientes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsFormSubmitted(true);
+      } else {
+        console.error('Erro ao enviar a ficha:', response.status, response.statusText);
+      }
     } catch (error) {
       console.error('Erro ao enviar a ficha:', error);
     }
@@ -77,20 +119,21 @@ const PrivateForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Label>Nome:</Label>
-      <Input type="text" />
+      <Input type="text" name="nome" value={nome} onChange={handleInputChange} />
 
       <Label>CPF:</Label>
-      <Input type="text" />
+      <Input type="text" name="cpf" value={cpf} onChange={handleInputChange} />
 
       <Label>RG:</Label>
-      <Input type="text" />
+      <Input type="text" name="rg" value={rg} onChange={handleInputChange} />
 
       <Label>Telefone:</Label>
-      <Input type="text" />
+      <Input type="text" name="telefone" value={telefone} onChange={handleInputChange} />
 
       <Label>Outros Sintomas:</Label>
       <TextArea
         rows={4}
+        name="outrosSintomas"
         placeholder="Digite outros sintomas aqui..."
         value={otherSymptoms}
         onChange={handleOtherSymptomsChange}
@@ -104,6 +147,7 @@ const PrivateForm = () => {
         value={painLevel || 0}
         onChange={handlePainLevelChange}
       />
+
       <StyledButtonLinkContainer>
         <ButtonLink customStyle="small">
           {isFormSubmitted ? (

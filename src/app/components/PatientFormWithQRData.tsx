@@ -53,6 +53,10 @@ interface PatientFormWithQRDataProps {
     cpf: string;
     convenio: string;
     numero_cart: string;
+    sexo: string;
+    rg: string;
+    tipoSangue: string;
+    escolaridade: string;
   } | null;
   onScanComplete: () => void;
 }
@@ -71,22 +75,37 @@ const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeDat
     setOtherSymptoms(event.target.value);
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    // Simula o envio da ficha
+  const handleEnviarFichaClick = async () => {
     try {
-      // Lógica para enviar a ficha ao médico (simulada por um atraso)
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setIsFormSubmitted(true);
-      onScanComplete();
+      const formData = {
+        nm_nome_paciente: qrCodeData?.nome || '',
+        nm_rg_paciente: qrCodeData?.rg || '',
+        nr_cpf_paciente: qrCodeData?.cpf || '',
+        fl_sexo_paciente: qrCodeData?.sexo || 'Feminino',
+        nm_tp_sang_paciente: qrCodeData?.tipoSangue || 'A-',
+        nm_escolaridade_paciente: qrCodeData?.escolaridade || 'Ensino Fundamental Completo',
+      };
+
+      const response = await fetch('http://localhost:8080/pacientes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+      if (response.status === 200) {
+        setIsFormSubmitted(true);
+        onScanComplete();
+      } else {
+        console.error('Erro ao enviar a ficha:', response.status, response.statusText);
+      }
     } catch (error) {
       console.error('Erro ao enviar a ficha:', error);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form>
       <Label>Nome:</Label>
       <Input type="text" defaultValue={qrCodeData?.nome || ''} readOnly />
 
@@ -99,6 +118,9 @@ const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeDat
       <Label>Número da Carteirinha:</Label>
       <Input type="text" defaultValue={qrCodeData?.numero_cart || ''} readOnly />
 
+      <Label>Outros Sintomas:</Label>
+      <TextArea value={otherSymptoms} onChange={handleOtherSymptomsChange} />
+
       <Label>Nível da Dor:</Label>
       <input
         type="range"
@@ -107,12 +129,9 @@ const PatientFormWithQRData: React.FC<PatientFormWithQRDataProps> = ({ qrCodeDat
         value={painLevel || 0}
         onChange={handlePainLevelChange}
       />
-
-      <Label>Outros Sintomas:</Label>
-      <TextArea value={otherSymptoms} onChange={handleOtherSymptomsChange} />
-
+      
       <StyledButtonLinkContainer>
-        <ButtonLink customStyle="small" href='/sheet-confirmation'>
+        <ButtonLink customStyle="small" onClick={handleEnviarFichaClick} href='/sheet-confirmation'>
           {isFormSubmitted ? 'ENVIAR FICHA' : 'ENVIAR FICHA'}
         </ButtonLink>
       </StyledButtonLinkContainer>
