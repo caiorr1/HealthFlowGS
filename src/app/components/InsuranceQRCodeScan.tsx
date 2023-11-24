@@ -45,6 +45,8 @@ const HomeTitle = styled.h1`
   font-style: normal;
   line-height: normal;
   font-weight: bold;
+  margin-bottom: 5px;
+  margin-top: 5px;
 `;
 
 const InsuranceQRCodeScan: React.FC<InsuranceQRCodeScanProps> = ({ onScanComplete }) => {
@@ -67,11 +69,11 @@ const InsuranceQRCodeScan: React.FC<InsuranceQRCodeScanProps> = ({ onScanComplet
         {scanComplete && (
           <UserInfoContainer>
             <HomeTitle>Seus dados:</HomeTitle>
-            <UserInfo>Nome: João da Silva</UserInfo>
+            <UserInfo>Nome: Fulano da Gama</UserInfo>
             <UserInfo>CPF: 123.456.789-00</UserInfo>
             <UserInfo>Convênio: Plano de Saúde XYZ</UserInfo>
             <UserInfo>Número da Carteirinha: 987654321</UserInfo>
-            <ButtonLink customStyle='small' onClick={() => onScanComplete({ nome: 'João da Silva', cpf: '123.456.789-00', convenio: 'Notre Dame', numero_cart:'987654321'})}>PRÓXIMO</ButtonLink>
+            <ButtonLink customStyle='small' onClick={() => onScanComplete({ nome: 'Fulano da Gama', cpf: '123.456.789-00', convenio: 'Notre Dame', numero_cart:'987654321'})}>PRÓXIMO</ButtonLink>
           </UserInfoContainer>
         )}
       </Container>
