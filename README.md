@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# HealthFlow
 
-## Getting Started
+Esse é um projeto/desafio proposto pela FIAP em parceria com a NotreDame!
 
-First, run the development server:
+Em nosso projeto revolucionário de triagem hospitalar,  redefine a experiência do paciente e otimiza os processos tradicionais. Imagine um totem inovador que não apenas elimina a necessidade de uma balconista para o preenchimento manual de fichas, mas também oferece uma abordagem abrangente para a triagem médica.
 
+Com o Totem de Triagem Hospitalar, você está no controle. Em um ambiente intuitivo, você pode inserir seus dados pessoais, indicar se possui convênio, descrever seus sintomas e avaliar suas dores de forma rápida e eficiente. Essa solução não só acelera o processo, mas também coloca nas suas mãos a capacidade de fornecer informações cruciais diretamente ao sistema.
+
+
+## Iniciar o projeto
+#### Npm
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Comandos
+- `dev`: inicia aplicação no [localhost:3000](http://localhost:3000);
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Integrantes do Grupo
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1TDSPY
+Caio Ribeiro Rodrigues 99759;
+Eduardo Bartolomeo Jablinski 550975;
+Guilherme Riofrio Quaglio 550137;
 
-## Learn More
+1TDSPX
+Natalia Siqueira Cardoso Scigliano 98430;
 
-To learn more about Next.js, take a look at the following resources:
+1TDSPV
+Thiago Gil Camargo – RM551211 – 1TDSPV
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
